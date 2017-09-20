@@ -334,6 +334,7 @@
     <Content Include="manifest.json" />
     <Content Include="Content\Cryptocoins\cryptocoins-icons.woff2" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <None Include="Properties\PublishProfiles\golovatenko - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Plugins\bootstrap-slider\slider.css" />
@@ -1190,7 +1191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

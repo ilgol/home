@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="google-site-verification" content="jVwHIbfBAXVF4vZLZn46p41j6H-m01YKBkbOWEkKXF0" />
+    <meta charset="utf-8" />
+    <title>Cryptocurrency monitor | Отслеживание курса криптовалют</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google-site-verification" content="B8T-r48WyL-e7mvO5gUTmTGO7fYqKXO1r9hc49HlMxY" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cryptocurrency monitor, Криптовалютный мониторинг" />
+    <meta name="keywords" content="Cryptocurrency monitor, Криптовалютный мониторинг, монитор валют, монитор курса криптовалют, cryptocurrency trading" />
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="@Url.Content("~/manifest.json")">
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="#1a8ca5">
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="#1a8ca5">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="ILGOL">
+    <link rel="icon" sizes="192x192" href="@Url.Content("~/Images/logo-google.jpg")">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ILGOL">
+    <link rel="apple-touch-icon" href="@Url.Content("~/Images/logo-apple.jpg")">
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="@Url.Content("~/Images/logo-windows.jpg")">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="icon" type="image/png" href="~/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <!-- bootstrap -->
+    @*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="screen" />*@
+    <link async rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="screen" />
+    <!-- style -->
+    @Styles.Render("~/Content/css")
+    <script type = 'text/javascript' >
+        var appInsights=window.appInsights||function(config)
+        {
+            function r(config){ t[config] = function(){ var i = arguments; t.queue.push(function(){ t[config].apply(t, i)})} }
+            var t = { config:config},u=document,e=window,o='script',s=u.createElement(o),i,f;for(s.src=config.url||'//az416426.vo.msecnd.net/scripts/a/ai.0.js',u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=['Event','Exception','Metric','PageView','Trace','Ajax'];i.length;)r('track'+i.pop());return r('setAuthenticatedUserContext'),r('clearAuthenticatedUserContext'),config.disableExceptionTracking||(i='onerror',r('_'+i),f=e[i],e[i]=function(config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o),s}),t
+        }({
+            instrumentationKey:'78803b78-7f31-412d-b75f-e5035c13d4bd'
+        });
+        
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+    <div class="wrapper" id="panel">
+        <div class="header">
+            <button class="toggle-button visible-sm visible-xs"><i class="fa fa-bars"></i></button>
+            <div class="logo animated fadeInUp hidden-xs hidden-sm">
+                <a href="/">
+                    <img src="~/Images/Logo.jpg" />
+                </a>
+            </div>
+            <a class="exit-button pull-right" href="@Url.Action("LogOff", "Account")"><i class="fa fa-sign-out"></i></a>
+        </div>
+        @RenderBody()
+        <audio controls="controls" id="audio" style="display:none">
+            <source src="~/Audio/123.mp3" type="audio/mpeg" />
+        </audio>
+        <div class="fixed-sidebar-left">
+            <!-- left-menu -->
+            <ul class="nav-side-menu">
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Poloniex" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("Poloniex", "Home")">
+                        <span>Poloniex</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "OKCoin" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("OKCoin", "Home")">
+                        <span>OKCoin</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "CEX" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("CEX", "Home")">
+                        <span>CEX.IO</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Bittrex" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("Bittrex", "Home")">
+                        <span>Bittrex</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Statistic" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("Index", "Statistic")">
+                        <span>Статистика</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a href="javascript:void(0)" class="back-to-down"></a>
+    <a href="javascript:void(0)" class="back-to-up"></a>
+    <div id="menu-tablet" class="menu-tablet">
+        <!-- main menu -->
+        <ul class="main-menu">
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Poloniex" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("Poloniex", "Home")">
+                    <span>Poloniex</span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "OKCoin" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("OKCoin", "Home")">
+                    <span>OKCoin</span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "CEX" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("CEX", "Home")">
+                    <span>CEX.IO</span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Bittrex" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("Bittrex", "Home")">
+                    <span>Bittrex</span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Statistic" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("Index", "Statistic")">
+                    <span>Статистика</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
+    @RenderSection("Modals", required: false)
+</body>
+</html>

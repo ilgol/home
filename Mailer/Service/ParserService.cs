@@ -93,11 +93,14 @@ namespace Mailer.Service
             StreamReader streamReader = null;
             try
             {
-                do { } while (!PingHost());
-
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
                 httpWebRequest.Method = "GET";
-                httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                do
+                {
+                    do { } while (!PingHost());
+                    httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                }
+                while (httpWebResponse.StatusCode != HttpStatusCode.OK);
                 streamReader = new StreamReader(httpWebResponse.GetResponseStream());
                 if (streamReader == null)
                 {

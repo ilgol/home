@@ -70,20 +70,22 @@ namespace Mailer.Service
                 db.SaveChanges();
             }
         }
-        private static bool PingHost(string nameOrAddress = "shop.bitmain.com")
+        public static bool PingHost(string nameOrAddress = "shop.bitmain.com")
         {
             bool pingable = false;
-            Ping pinger = new Ping();
-            try
+            using (Ping pinger = new Ping())
             {
-                PingReply reply = pinger.Send(nameOrAddress);
-                pingable = reply.Status == IPStatus.Success;
+                try
+                {
+                    PingReply reply = pinger.Send(nameOrAddress);
+                    pingable = reply.Status == IPStatus.Success;
+                }
+                catch (PingException e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
+                return pingable;
             }
-            catch (PingException e)
-            {
-                Console.WriteLine(e.InnerException.Message);
-            }
-            return pingable;
         }
 
         private static string HttpGet(string url)

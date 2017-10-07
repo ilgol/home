@@ -18,17 +18,19 @@ namespace Update
         public static bool PingHost(string nameOrAddress = "dgb-scrypt.theblocksfactory.com")
         {
             bool pingable = false;
-            Ping pinger = new Ping();
-            try
+            using (Ping pinger = new Ping())
             {
-                PingReply reply = pinger.Send(nameOrAddress);
-                pingable = reply.Status == IPStatus.Success;
+                try
+                {
+                    PingReply reply = pinger.Send(nameOrAddress);
+                    pingable = reply.Status == IPStatus.Success;
+                }
+                catch (PingException e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
+                return pingable;
             }
-            catch (PingException e)
-            {
-                Console.WriteLine(e.InnerException.Message);
-            }
-            return pingable;
         }
         public void GetStatistic(string url, string param)
         {
@@ -109,6 +111,7 @@ namespace Update
                     Payout = (statistic.payout_history + statistic.confirmed_rewards).ToString(),
                     Date = DateTime.Now
                 });
+                do { } while (!PingHost());
                 db.SaveChanges();
             }
         }

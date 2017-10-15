@@ -362,9 +362,9 @@
         }
 
         function onOpen(evt) {
-            doSend("{'event':'addChannel','channel':'ok_sub_spotusd_btc_ticker'}");
-            doSend("{'event':'addChannel','channel':'ok_sub_spotusd_ltc_ticker'}");
-            doSend("{'event':'addChannel','channel':'ok_sub_spotusd_eth_ticker'}");
+            doSend("{'event':'addChannel','channel':'ok_sub_spot_btc_usd_ticker'}");
+            doSend("{'event':'addChannel','channel':'ok_sub_spot_ltc_usd_ticker'}");
+            doSend("{'event':'addChannel','channel':'ok_sub_spot_eth_usd_ticker'}");
         }
 
         function onMessage(e) {
@@ -427,7 +427,7 @@
             okCoinWebSocket.websocket.send(message);
         }
 
-        window.onload = okCoinWebSocket.init("wss://real.okcoin.com:10440/websocket/okcoinapi");
+        window.onload = okCoinWebSocket.init("wss://real.okcoin.com:10441/websocket");
 
         //function getTicker(ticker) {
         //    $.ajax({

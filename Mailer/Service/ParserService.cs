@@ -24,9 +24,21 @@ namespace Mailer.Service
             foreach (var node in nodes)
             {
                 var li = node.ParentNode.ParentNode.ParentNode;
-                var name = li.ChildNodes.ToList()[3].InnerText.Replace("\t", "").Trim().Split('\n')[0];
-                var price = li.ChildNodes.ToList()[5].ChildNodes.ToList()[3].InnerText.Replace("&nbsp;", " ");
-                var link = "https://shop.bitmain.com/" + li.ChildNodes.ToList()[7].ChildNodes.ToList()[3].Attributes["href"].Value;
+                string name;
+                string price;
+                string link;
+                if (li.ChildNodes.ToList()[1].InnerText != "Pre-sale")
+                {
+                    name = li.ChildNodes.ToList()[3].InnerText.Replace("\t", "").Trim().Split('\n')[0];
+                    price = li.ChildNodes.ToList()[5].ChildNodes.ToList()[3].InnerText.Replace("&nbsp;", " ");
+                    link = "https://shop.bitmain.com/" + li.ChildNodes.ToList()[7].ChildNodes.ToList()[3].Attributes["href"].Value;
+                }
+                else
+                {
+                    name = li.ChildNodes.ToList()[5].InnerText.Replace("\t", "").Trim().Split('\n')[0];
+                    price = li.ChildNodes.ToList()[7].ChildNodes.ToList()[3].InnerText.Replace("&nbsp;", " ");
+                    link = "https://shop.bitmain.com/" + li.ChildNodes.ToList()[9].ChildNodes.ToList()[3].Attributes["href"].Value;
+                }
                 itemData.Add(new ItemModel()
                 {
                     Name = name,

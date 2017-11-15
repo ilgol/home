@@ -178,8 +178,10 @@
                 resize: true,
                 data: res.PartialHashRate,
                 xkey: 'Date',
-                ykeys: ['SQ1', 'SQ2', 'SQ3', 'SQ4', 'SQ5', 'SQ6', 'SQ7', 'SQ8', 'SQ9', 'SQ10'],
-                labels: ['SQ1 (Mh/s)', 'SQ2 (Mh/s)', 'SQ3 (Mh/s)', 'SQ4 (Mh/s)', 'SQ5 (Mh/s)', 'SQ6 (Mh/s)', 'SQ7 (Mh/s)', 'SQ8 (Mh/s)', 'SQ9 (Mh/s)', 'SQ10 (Mh/s)'],
+                ykeys: ['SQ1', 'SQ2', 'SQ3', 'SQ4', 'SQ5'],
+                //ykeys: ['SQ1', 'SQ2', 'SQ3', 'SQ4', 'SQ5', 'SQ6', 'SQ7', 'SQ8', 'SQ9', 'SQ10'],
+                labels: ['SQ1 (Mh/s)', 'SQ2 (Mh/s)', 'SQ3 (Mh/s)', 'SQ4 (Mh/s)', 'SQ5 (Mh/s)'],
+                //labels: ['SQ1 (Mh/s)', 'SQ2 (Mh/s)', 'SQ3 (Mh/s)', 'SQ4 (Mh/s)', 'SQ5 (Mh/s)', 'SQ6 (Mh/s)', 'SQ7 (Mh/s)', 'SQ8 (Mh/s)', 'SQ9 (Mh/s)', 'SQ10 (Mh/s)'],
                 hideHover: false,
                 ymax: 'auto',
                 ymin: 'auto',
@@ -188,7 +190,8 @@
                     $(".partial .legend").html("");
                     $(".time").remove();
                     var data = [];
-                    for (var i = 1; i < 11; i++) {
+                    for (var i = 1; i < 6; i++) {
+                    //for (var i = 1; i < 11; i++) {
                         $(".partial .legend").append(
                             `<div class="legend-item">
                                 <span class="name">` + options.labels[i - 1] + `</span>
@@ -198,7 +201,8 @@
                     }
                     $(".partial .box-header").append(`<label class="time label-primary" style="margin: 0;border-radius: 10px;float: right;padding: 5px;"><i class="fa fa-clock-o" style= "font-size:17px"> ` + key(options.data[index], 0) + `</i></label>`);
                 },
-                lineColors: ["#4b42bc", "#6d8035", "#6cbad8", "#e9264e", "#14674b", "#e8e092", "#763379", "#42ee59", "#f030ba", "#9f9fa7"]
+                lineColors: ["#4b42bc", "#6d8035", "#6cbad8", "#e9264e", "#14674b"]
+                //lineColors: ["#4b42bc", "#6d8035", "#6cbad8", "#e9264e", "#14674b", "#e8e092", "#763379", "#42ee59", "#f030ba", "#9f9fa7"]
             });
         }
 

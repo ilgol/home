@@ -36,15 +36,15 @@ namespace PoloniexWeb.Services
                     {
                         Date = pair.Key,
                         SQ1 = Math.Round(pair.Value[0].HashRate),
-                        SQ2 = Math.Round(pair.Value[2].HashRate),
-                        SQ3 = Math.Round(pair.Value[3].HashRate),
-                        SQ4 = Math.Round(pair.Value[4].HashRate),
-                        SQ5 = Math.Round(pair.Value[5].HashRate),
-                        SQ6 = Math.Round(pair.Value[6].HashRate),
-                        SQ7 = Math.Round(pair.Value[7].HashRate),
-                        SQ8 = Math.Round(pair.Value[8].HashRate),
-                        SQ9 = Math.Round(pair.Value[9].HashRate),
-                        SQ10 = Math.Round(pair.Value[1].HashRate)
+                        SQ2 = Math.Round(pair.Value[1].HashRate),
+                        SQ3 = Math.Round(pair.Value[2].HashRate),
+                        SQ4 = Math.Round(pair.Value[3].HashRate),
+                        SQ5 = Math.Round(pair.Value[4].HashRate)
+                        //SQ6 = Math.Round(pair.Value[6].HashRate),
+                        //SQ7 = Math.Round(pair.Value[7].HashRate),
+                        //SQ8 = Math.Round(pair.Value[8].HashRate),
+                        //SQ9 = Math.Round(pair.Value[9].HashRate),
+                        //SQ10 = Math.Round(pair.Value[1].HashRate)
                     });
                 }
                 return new StatisticModel()

@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Windows.Forms;
+using System.Media;
 
 namespace Mailer.Service
 {
@@ -24,8 +26,23 @@ namespace Mailer.Service
             return ConfigurationManager.AppSettings[key];
         }
 
+        public static void NotifyViaMsgBox(ItemModel obj)
+        {
+            using (SoundPlayer player = new SoundPlayer())
+            {
+                player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\123.wav";
+                player.Play();
+                if (MessageBox.Show($"Название: {obj.Name}\nЦена: {obj.Price}\nНажмите ОК для покупки", "На Bitmain новые поступления", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    player.Stop();
+                    System.Diagnostics.Process.Start($"{obj.Link}");
+                }
+            }
+        }
+
         public static void Notify(ItemModel obj)
         {
+
             var defaultCulture = CultureInfo.GetCultureInfoByIetfLanguageTag("uk-UA");
             var subject = "На Bitmain нові надходження";
             if (CultureInfo.CurrentCulture.Name == "ru-RU")

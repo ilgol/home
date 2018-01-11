@@ -334,6 +334,8 @@
     <Content Include="manifest.json" />
     <Content Include="Content\Cryptocoins\cryptocoins-icons.woff2" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\golovatenko - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Plugins\bootstrap-slider\bootstrap-slider.js" />

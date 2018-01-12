@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Обіг продутків</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="@Url.Content("~/manifest.json")">
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="#1a8ca5">
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="#1a8ca5">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="ILGOL">
+    <link rel="icon" sizes="192x192" href="@Url.Content("~/Images/logo-google.jpg")">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ILGOL">
+    <link rel="apple-touch-icon" href="@Url.Content("~/Images/logo-apple.jpg")">
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="@Url.Content("~/Images/logo-windows.jpg")">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="icon" type="image/png" href="~/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <!-- bootstrap -->
+    @*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="screen" />*@
+    <link async rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="screen" />
+    <!-- style -->
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="wrapper" id="panel">
+        <div class="header">
+            <button class="toggle-button visible-sm visible-xs"><i class="fa fa-bars"></i></button>
+            <div class="logo animated fadeInUp hidden-xs hidden-sm">
+                <a href="/">
+                    <img src="~/Images/Logo.jpg" />
+                </a>
+            </div>
+            <a class="exit-button pull-right" href="@Url.Action("Index", "Home")"><i class="fa fa-sign-out"></i></a>
+        </div>
+        @RenderBody()
+        <div class="fixed-sidebar-left">
+            <!-- left-menu -->
+            <ul class="nav-side-menu">
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Warehouse" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("Warehouse", "Home")">
+                        <span>Комірчина</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "ShoppingList" ? "active" : "") animated fadeInUp">
+                    <a href="@Url.Action("ShoppingList", "Home")">
+                        <span>Закупівля</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="menu-tablet" class="menu-tablet">
+        <!-- main menu -->
+        <ul class="main-menu">
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Warehouse" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("Warehouse", "Home")">
+                    <span>Комірчина</span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "ShoppingList" ? "active" : "") animated fadeInUp">
+                <a href="@Url.Action("ShoppingList", "Home")">
+                    <span>Закупівля</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
+    @RenderSection("Modals", required: false)
+</body>
+</html>

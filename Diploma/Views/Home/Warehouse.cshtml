@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Warehouse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+<main id="main">
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <!-- LINE CHART -->
+                    <div class="box box-primary hash-rate overall">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Продукти у комірчині</h3>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="cs-loader miniloader" style="text-align: center; width:100%;">
+                                <div class="cs-loader-inner">
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                    <label>	●</label>
+                                </div>
+                            </div>
+                            <div class="animated bounceIn">
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <table class="table table-condensed">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Task</th>
+                                                <th>Progress</th>
+                                                <th style="width: 40px">Label</th>
+                                            </tr>
+                                            <tr>
+                                                <td>1.</td>
+                                                <td>Update software</td>
+                                                <td>
+                                                    <div class="progress progress-xs progress-striped active">
+                                                        <div class="progress-bar progress-bar-danger" style="width: 5%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-red">0 шт.</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2.</td>
+                                                <td>Clean database</td>
+                                                <td>
+                                                    <div class="progress progress-xs progress-striped active">
+                                                        <div class="progress-bar progress-bar-yellow" style="width: 50%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-yellow">2 шт.</span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>4.</td>
+                                                <td>Fix and squish bugs</td>
+                                                <td>
+                                                    <div class="progress progress-xs progress-striped active">
+                                                        <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-green">5 шт.</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer id="footer" class="inner-page">
+    <div class="footer-pane">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                <div class="copyright">© 2018 ILGOL. All Rights Reserved</div>
+            </div>
+        </div>
+    </div>
+</footer>
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+    <script src="~/base/Scripts/moment-with-locales.js"></script>
+    <script src="~/Plugins/daterangepicker/daterangepicker.js"></script>
+}

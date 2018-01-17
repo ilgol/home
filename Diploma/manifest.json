@@ -1,7 +1,7 @@
 {
   "name": "ILGOL ALWAYS AHEAD",
   "short_name": "ILGOL",
-  "start_url": "http://82.144.216.114:62434/base",
+  "start_url": "http://82.144.216.114:62434/",
   "icons": [
     {
       "src": "/Images/logo-apple.png",

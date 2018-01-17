@@ -77,6 +77,9 @@
     <Compile Include="PayoutHistory.cs">
       <DependentUpon>Home.tt</DependentUpon>
     </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>Home.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs">
       <DependentUpon>Home.tt</DependentUpon>

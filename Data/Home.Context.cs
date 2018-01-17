@@ -30,5 +30,6 @@ namespace Data
         public virtual DbSet<PayoutHistory> PayoutHistories { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Notify> Notifies { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

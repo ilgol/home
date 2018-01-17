@@ -70,7 +70,7 @@ namespace Mailer.Service
                         do { } while (!PingHost());
                         db.Notifies.AddRange(newItems.Select(i => new Notify() { Id = Guid.NewGuid(), Name = i.Name }));
                         newItems.ForEach(EmailService.Notify);
-                        newItems.Where(i => i.Name.Contains("S9")).ToList().ForEach(EmailService.NotifyViaMsgBox);
+                        newItems.Where(i => i.Name.Contains("A3")).ToList().ForEach(EmailService.NotifyViaMsgBox);
                     }
                 }
                 else
@@ -78,7 +78,7 @@ namespace Mailer.Service
                     do { } while (!PingHost());
                     db.Notifies.AddRange(itemData.Select(i => new Notify() { Id = Guid.NewGuid(), Name = i.Name }));
                     itemData.ForEach(EmailService.Notify);
-                    itemData.Where(i => i.Name.Contains("S9")).ToList().ForEach(EmailService.NotifyViaMsgBox);
+                    itemData.Where(i => i.Name.Contains("A3")).ToList().ForEach(EmailService.NotifyViaMsgBox);
                 }
                 do { } while (!PingHost());
                 db.SaveChanges();

@@ -1,8 +1,237 @@
-﻿
+﻿@model List<Diploma.Models.ProductModel>
 @{
     ViewBag.Title = "ShoppingList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+<main id="main">
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <!-- LINE CHART -->
+                    @if (Model != null)
+                    {
+                        if (Model.Any())
+                        {
+                            <div class="app">
+                                <h2>Список покупок</h2>
+                                <form>
+                                    <input id="input" type="text" placeholder="Потрібно ще купити..."><br><button type="button" id="btn">+</button>
+                                </form>
+                                <i class="fa fa-shopping-basket fa-3x" aria-hidden="true"></i>
+                                <div class="app-body">
+                                    <ul class="list">
+                                        @for (int i = 0; i < Model.Count; i++)
+                                        {
+                                            <li class="item">
+                                                <span class="name">@Model[i].Name</span>
+                                                <div class="quantity">
+                                                    <span class="input-number-decrement">–</span>
+                                                    <input class="input-number" type="text" value="@Model[i].DefaultValue" min="0" max="100">
+                                                    <span class="input-number-increment">+</span>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <a class="btn btn-app">
+                                    <i class="fa fa-check"></i> Завершити
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="box info-section box-primary animated fadeInUp">
+                                <div class="box-body">
+                                    <div class="icons" style="font-size:50px;text-align:center">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="text" style="text-align:center">
+                                        <h3>Схоже не прийшов ще час бігти до магазину</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="app animated fadeInUp">
+                            <h2>Список покупок</h2>
+                            <form>
+                                <input id="input" type="text" placeholder="Потрібно ще купити...">
+                                <br>
+                                <button type="button" id="btn"> +</button>
+                            </form>
+                            <i class="fa fa-shopping-basket fa-3x" aria-hidden="true"></i>
+                            <div class="app-body">
+                                <ul class="list"></ul>
+                            </div>
+                        </div>
+                    }
+                </div>
 
-<h2>ShoppingList</h2>
+            </div>
+        </div>
+    </div>
+</main>
+@*<footer id="footer" class="inner-page">
+        <div class="footer-pane">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <div class="copyright">© 2018 ILGOL. All Rights Reserved</div>
+                </div>
+            </div>
+        </div>
+    </footer>*@
+@section scripts {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+    <script src="~/Scripts/slideout.min.js"></script>
+    <script src="~/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+    <script>
+        toDelete = []
+        alreadyAdd = []
+        function subscriber(element = $(".input-number")) {
 
+            function inputNumber(el) {
+
+                var min = el.attr('min') || false;
+                var max = el.attr('max') || false;
+
+                var els = {};
+
+                els.dec = el.prev();
+                els.inc = el.next();
+
+                el.each(function () {
+                    init($(this));
+                });
+
+                function init(el) {
+
+                    els.dec.on('click', decrement);
+                    els.inc.on('click', increment);
+
+                    function decrement() {
+                        var value = el[0].value;
+                        value--;
+                        if (!min || value >= min) {
+                            el[0].value = value;
+                        }
+                    }
+
+                    function increment() {
+                        var value = el[0].value;
+                        value++;
+                        if (!max || value <= max) {
+                            el[0].value = value++;
+                        }
+                    }
+                }
+            }
+
+            $('.item .name').click(function () {
+                var el = $(this).parent();
+                el.remove();
+                name = $(el).children(".name").text();
+                quantity = $(el).children(".quantity").children(".input-number").val();
+                toDelete.push({ 'Name': name, 'Quantity': quantity });
+            });
+
+            inputNumber(element);
+        }
+
+        $(".btn").click(function () {
+            toUpdate = []
+            $(".list .item").each(function (i, el) {
+                name = $(el).children(".name").text();
+                quantity = $(el).children(".quantity").children(".input-number").val();
+                toUpdate.push({ 'Name': name, 'Quantity': quantity });
+            });
+            $.ajax({
+                url: '@Url.Action("UpdateEntities", "Home")',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ toUpdate: toUpdate, toDelete: toDelete }),
+                beforeSend: function () {
+                    $('.preloader').fadeIn('slow', function () { $(this).show(); });
+                },
+                success: function (data) {
+                    $('.preloader').fadeOut('slow', function () { $(this).hide(); });
+                },
+                complete: function () {
+                    window.location.href = '@Url.Action("Warehouse", "Home")';
+                },
+                error: function (response) {
+                    alert("Error: " + (response.responseText || response.data));
+                }
+            });
+        })
+
+        $(document).ready(function () {
+            $(window).on('load', $('.preloader').fadeOut('slow', function () { $(this).hide(); }));
+
+            subscriber();
+
+            var textInput = $('#input').val();
+
+            $("#input").keyup(function () {
+                if ($(this).val()) {
+                    $("#btn").css("display", "inline-block");
+                }
+                else {
+                    $("#btn").hide();
+                }
+            });
+            $("#btn").click(function () {
+                $(this).hide();
+            });
+
+            $('#btn').click(function () {
+                var textInput = $('#input').val();
+                if (!alreadyAdd.includes(textInput.toLowerCase())) {
+                    alreadyAdd.push(textInput.toLowerCase());
+                    element = $('<li class="item">').html("<span class='name'>" + textInput + "</span>" + "<div class='quantity'><span class='input-number-decrement'>–</span> <input class='input-number' type='text' value='1' min='1' max='100'><span class='input-number-increment'>+</span></div>");
+                    element.prependTo('.list');
+                    $('#input').val('');
+
+                    subscriber($(element.children(".quantity").children(".input-number")));
+                }
+                else {
+                    $.jGrowl(textInput + " уже у списку", {
+                        sticky: false,
+                        position: 'top-right',
+                        theme: 'bg-orange'
+                    });
+                }
+            });
+
+            $('#input').keypress(function (e) {
+                var textInput = $('#input').val();
+                if (e.which == 13) {
+                    if (!alreadyAdd.includes(textInput.toLowerCase())) {
+                        alreadyAdd.push(textInput.toLowerCase());
+
+                        element = $('<li class="item">').html("<span class='name'>" + textInput + "</span>" + "<div class='quantity'><span class='input-number-decrement'>–</span> <input class='input-number' type='text' value='1' min='1' max='100'><span class='input-number-increment'>+</span></div>");
+                        element.prependTo('.list');
+                        $('#input').val('');
+
+                        subscriber($(element.children(".quantity").children(".input-number")));
+                    }
+                    else {
+                        $.jGrowl(textInput + " уже у списку", {
+                            sticky: false,
+                            position: 'top-right',
+                            theme: 'bg-orange'
+                        });
+                    }
+                    return false;
+                }
+            });
+        });
+    </script>
+}

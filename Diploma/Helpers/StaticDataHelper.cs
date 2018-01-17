@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
-namespace PoloniexWeb.Helpers
+namespace Diploma.Helpers
 {
     public class StaticDataHelper
     {

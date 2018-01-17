@@ -1,87 +1,94 @@
-﻿
+﻿@model List<Diploma.Models.ProductModel>
 @{
     ViewBag.Title = "Warehouse";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isItTimeToShopping = false;
 }
-
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+<link href="~/Plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
 <main id="main">
     <div class="container">
         <div class="content">
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <!-- LINE CHART -->
-                    <div class="box box-primary hash-rate overall">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Продукти у комірчині</h3>
+                    @if (Model != null && Model.Any())
+                    {
+                        <div class="box animated fadeInUp box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">Список для закупівлі</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-striped" id="warehouse">
+                                    <thead>
+                                        <tr>
+                                            <th>Продукт</th>
+                                            <th>Стан</th>
+                                            <th>Кількість</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.Count; i++)
+                                        {
+                                            int quantity = Model[i].Quantity;
+                                            <tr>
+                                                <td>@Model[i].Name</td>
+                                                @if (quantity >= 5)
+                                                {
+                                                    <td>
+                                                        <div class="progress progress-xs progress-striped active">
+                                                            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align:center"><span class="badge bg-green">@quantity шт.</span></td>
+                                                }
+                                                else if (quantity >= 2 && quantity < 5)
+                                                {
+                                                    <td>
+                                                        <div class="progress progress-xs progress-striped active">
+                                                            <div class="progress-bar progress-bar-yellow" style="width: 30%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align:center"><span class="badge bg-yellow">@quantity шт.</span></td>
+                                                }
+                                                else
+                                                {
+                                                    isItTimeToShopping = true;
+                                                    <td>
+                                                        <div class="progress progress-xs progress-striped active">
+                                                            <div class="progress-bar progress-bar-danger" style="width: 5%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align:center"><span class="badge bg-red">@quantity шт.</span></td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <div class="box-body chart-responsive">
-                            <div class="cs-loader miniloader" style="text-align: center; width:100%;">
-                                <div class="cs-loader-inner">
-                                    <label>	●</label>
-                                    <label>	●</label>
-                                    <label>	●</label>
-                                    <label>	●</label>
-                                    <label>	●</label>
-                                    <label>	●</label>
+                    }
+                    else
+                    {
+                        <div class="box info-section box-primary animated fadeInUp">
+                            <div class="box-body">
+                                <div class="icons" style="font-size:50px;text-align:center">
+                                    <i class="fa fa-cart-arrow-down"></i>
+                                </div>
+                                <div class="text" style="text-align:center">
+                                    <h3>Потрібно чим швидше поповнити комірчину</h3>
                                 </div>
                             </div>
-                            <div class="animated bounceIn">
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table class="table table-condensed">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Task</th>
-                                                <th>Progress</th>
-                                                <th style="width: 40px">Label</th>
-                                            </tr>
-                                            <tr>
-                                                <td>1.</td>
-                                                <td>Update software</td>
-                                                <td>
-                                                    <div class="progress progress-xs progress-striped active">
-                                                        <div class="progress-bar progress-bar-danger" style="width: 5%"></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-red">0 шт.</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2.</td>
-                                                <td>Clean database</td>
-                                                <td>
-                                                    <div class="progress progress-xs progress-striped active">
-                                                        <div class="progress-bar progress-bar-yellow" style="width: 50%"></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-yellow">2 шт.</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>4.</td>
-                                                <td>Fix and squish bugs</td>
-                                                <td>
-                                                    <div class="progress progress-xs progress-striped active">
-                                                        <div class="progress-bar progress-bar-success" style="width: 100%"></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-green">5 шт.</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
                         </div>
-                        <!-- /.box-body -->
-                    </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </main>
-<footer id="footer" class="inner-page">
+@*<footer id="footer" class="inner-page">
     <div class="footer-pane">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
@@ -89,12 +96,36 @@
             </div>
         </div>
     </div>
-</footer>
+</footer>*@
 @section scripts{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
-    <script src="~/base/Scripts/moment-with-locales.js"></script>
-    <script src="~/Plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Scripts/slideout.min.js"></script>
+    <script src="~/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(function () {
+            $(window).on('load', $('.preloader').fadeOut('slow', function () { $(this).hide(); }));
+            $('#warehouse').DataTable({
+                responsive: true,
+                "paging": true,
+                "pageLength": 5,
+                "lengthMenu": [[5, 20, 50, -1], [5, 20, 50, "Всі"]],
+                "lengthChange": true,
+                "searching": true,
+                "autoWidth": true,
+                "columns": [
+                    null,
+                    null,
+                    null
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Ukranian.json"
+                }
+            });
+            var isItTime = @Json.Encode(isItTimeToShopping);
+            if (isItTime) {
+                $("<span class='pull-right-container'>").html("<span class='label label-danger pull-right'><i class='fa fa-exclamation'></i></span>").prependTo('.shopping a');
+            }
+        });
+   </script>
 }

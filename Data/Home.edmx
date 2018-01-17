@@ -37,6 +37,15 @@
           <Property Name="Payout" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="DefaultValue" Type="int" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -50,6 +59,7 @@
           <EntitySet Name="OverallHashRateHistory" EntityType="Self.OverallHashRateHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartialHashRateHistory" EntityType="Self.PartialHashRateHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayoutHistory" EntityType="Self.PayoutHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -95,6 +105,7 @@
           <EntitySet Name="PayoutHistories" EntityType="Self.PayoutHistory" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Notifies" EntityType="homesqlModel.Notify" />
+          <EntitySet Name="Products" EntityType="homesqlModel.Product" />
         </EntityContainer>
         <EntityType Name="Notify">
           <Key>
@@ -102,6 +113,15 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="DefaultValue" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -150,6 +170,16 @@
             <EntityTypeMapping TypeName="homesqlModel.Notify">
               <MappingFragment StoreEntitySet="Notify">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="homesqlModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

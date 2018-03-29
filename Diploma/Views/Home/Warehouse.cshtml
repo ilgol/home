@@ -3,6 +3,7 @@
     ViewBag.Title = "Warehouse";
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool isItTimeToShopping = false;
+    int counter = 0;
 }
 <link href="~/Plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
@@ -54,7 +55,11 @@
                                                 }
                                                 else
                                                 {
-                                                    isItTimeToShopping = true;
+                                                    if (quantity == 0)
+                                                    {
+                                                        counter++;
+                                                        isItTimeToShopping = true;
+                                                    }
                                                     <td>
                                                         <div class="progress progress-xs progress-striped active">
                                                             <div class="progress-bar progress-bar-danger" style="width: 5%"></div>
@@ -124,7 +129,9 @@
             });
             var isItTime = @Json.Encode(isItTimeToShopping);
             if (isItTime) {
-                $("<span class='pull-right-container'>").html("<span class='label label-danger pull-right'><i class='fa fa-exclamation'></i></span>").prependTo('.shopping a');
+                var counter = @Json.Encode(counter);
+                $(".notification").addClass("dot");
+                $("<span class='pull-right-container'>").html("<span class='label label-danger pull-right'>" + counter + "</span>").prependTo('.shopping a');
             }
         });
    </script>
